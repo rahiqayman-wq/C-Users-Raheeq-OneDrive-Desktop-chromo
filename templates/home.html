@@ -1,0 +1,221 @@
+{% extends "tempelate.html"%}
+{% block content %}
+
+<section class="hero-section text-light text-center text-sm-start">
+  <div class="container-fluid p-0">
+    <div class="d-sm-flex align-items-center justify-content-between">
+      <div class="hero-text ps-5">
+        <h1 class="hero-title display-4 fw-bold mb-4">
+          Empowering Children with Down Syndrome
+        </h1>
+        <p class="lead my-4 hero-lead">
+          Get ready to support your child with Down syndrome through effective technological solutions.
+        </p>
+        <div class="hero-buttons">
+          <a class="btn custom-link btn-lg me-3" href="{{ url_for('loginform') }}">
+            Get Started
+          </a>
+          <a class="btn btn-outline-light btn-lg" href="{{ url_for('about') }}">
+            Learn More
+          </a>
+        </div>
+        <div class="hero-features mt-5">
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <span>Interactive Games</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🗣️</span>
+            <span>Speech Therapy</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📊</span>
+            <span>Progress Tracking</span>
+          </div>
+        </div>
+      </div>
+      <img class="hero-img d-none d-sm-block"
+           src="{{ url_for('static', filename='2150520907 (2) 1.png') }}" alt="Child using educational app">
+    </div>
+  </div>
+</section>
+
+<footer class="bg-dark text-white text-center p-3">
+  <p class="mb-0">&copy; 2025 Your Website. All rights reserved.</p>
+</footer>
+
+<style>
+ 
+  .hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url("{{ url_for('static', filename='MacBook Air - 31.png') }}") no-repeat center center/cover;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(47, 94, 47, 0.3) 0%, transparent 50%);
+    z-index: 1;
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 2;
+  }
+
+
+  .hero-title {
+    font-size: 3.5rem;
+    background: linear-gradient(45deg, #d9f0d9, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+  }
+
+  .hero-lead {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .hero-buttons {
+    margin-top: 2rem;
+  }
+
+  .btn-outline-light {
+    border-width: 2px;
+    padding: 16px 36px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.4rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+ 
+  .custom-link {
+    background: linear-gradient(135deg, #d9f0d9, #b8e0b8);
+    color: #2f5e2f !important;
+    padding: 16px 36px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.4rem;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(47, 94, 47, 0.3);
+  }
+
+  .custom-link:hover {
+    background: linear-gradient(135deg, hsl(120, 33%, 28%), #3a6b3a);
+    color: white !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(47, 94, 47, 0.4);
+  }
+
+  .hero-img {
+    display: block;
+    max-width: 50%;
+    height: auto;
+    margin: 30px -40px 0 0;
+    padding: 0;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+
+  
+  .hero-features {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem !important;
+  }
+
+  .feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .feature-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-item span:last-child {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+ 
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    
+    .hero-lead {
+      font-size: 1.4rem;
+    }
+    
+    .hero-buttons {
+      text-align: center;
+    }
+    
+    .hero-buttons .btn {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    
+    .hero-features {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .hero-img {
+      max-width: 80%;
+      margin: 2rem auto 0;
+    }
+  }
+
+
+  .container-fluid {
+    padding: 0;
+  }
+</style>
+
+{% endblock content %}

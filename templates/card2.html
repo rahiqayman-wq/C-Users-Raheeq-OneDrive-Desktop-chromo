@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقارير التقدم</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4ecdc4 0%, #67e6dc 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .back-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #4ecdc4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="back-btn">← العودة للرئيسية</a>
+        <h1>📊 تقارير التقدم</h1>
+        <p>تابع إنجازاتك وتقدمك في رحلة التعلم</p>
+        
+        <div class="progress-stats">
+            <div class="stat">
+                <h3>🎯 الألعاب المكتملة</h3>
+                <p style="font-size: 2em; color: #4ecdc4; margin: 10px 0;">8</p>
+            </div>
+            <div class="stat">
+                <h3>⭐ النقاط المكتسبة</h3>
+                <p style="font-size: 2em; color: #ffe66d; margin: 10px 0;">350</p>
+            </div>
+            <div class="stat">
+                <h3>📈 مستوى التقدم</h3>
+                <p style="font-size: 2em; color: #ff6b6b; margin: 10px 0;">75%</p>
+            </div>
+            <div class="stat">
+                <h3>🎖️ الشارات</h3>
+                <p style="font-size: 2em; color: #6a4c93; margin: 10px 0;">5</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

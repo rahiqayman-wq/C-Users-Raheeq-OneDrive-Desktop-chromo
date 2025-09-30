@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Cards with Sounds</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #08aa46a7 0%, #51dc6bc5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .categories {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .category {
+            flex: 1;
+            min-width: 300px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .category h2 {
+            color: #444;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .shapes h2 {
+            border-color: #FF6B6B;
+        }
+
+        .colors h2 {
+            border-color: #4ECDC4;
+        }
+
+        .animals h2 {
+            border-color: #FFE66D;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .card {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .shape-card {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+        }
+
+        .color-card {
+            background: linear-gradient(135deg, #4ECDC4, #88D9D3);
+        }
+
+        .animal-card {
+            background: linear-gradient(135deg, #FFE66D, #FFED94);
+        }
+
+        .instructions {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f1f3f5;
+            border-radius: 10px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .sound-icon {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .emoji {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .categories {
+                flex-direction: column;
+            }
+            
+            .category {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎴 Flash Cards with Sounds 🎵</h1>
+        
+        <div class="categories">
+            <div class="category shapes">
+                <h2>Shapes</h2>
+                <div class="cards">
+                    <div class="card shape-card" onclick="playSound('circle')">
+                        <div class="emoji">⭕</div>
+                        <span>Circle</span>
+                        <div class="sound-icon">🔊</div>
+                    </div>
+                    <div class="card shape-card" onclick="playSound('square')">
+                        <div class="emoji">⬜</div>
+                        <span>Square</span>
+                        <div class="sound-icon">🔊</div>
+                    </div>
+                    <div class="card shape-card" onclick="playSound('triangle')">
+                        <div class="emoji">🔺</div>
+                        <span>Triangle</span>
+                        <div class="sound-icon">🔊</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category colors">
+                <h2>Colors</h2>
+                <div class="cards">
+                    <div class="card color-card" onclick="playSound('red')">
+                        <div class="emoji">🔴</div>
+                        <span>Red</span>
+                        <div class="sound-icon">🔊</div>
+                    </div>
+                    <div class="card color-card" onclick="playSound('blue')">
+                        <div class="emoji">🔵</div>
+                        <span>Blue</span>
+                        <div class="sound-icon">🔊</div>
+                    </div>
+                    <div class="card color-card" onclick="playSound('green')">
+                        <div class="emoji">🟢</div>
+                        <span>Green</span>
+                        <div class="sound-icon">🔊</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category animals">
+                <h2>Animals</h2>
+                <div class="cards">
+                    <div class="card animal-card" onclick="playSound('cat')">
+                        <div class="emoji">🐱</div>
+                        <span>Cat</span>
+                        <div class="sound-icon">🔊</div>
+                    </div>
+                    <div class="card animal-card" onclick="playSound('dog')">
+                        <div class="emoji">🐶</div>
+                        <span>Dog</span>
+                        <div class="sound-icon">🔊</div>
+                    </div>
+                    <div class="card animal-card" onclick="playSound('bird')">
+                        <div class="emoji">🐦</div>
+                        <span>Bird</span>
+                        <div class="sound-icon">🔊</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <p>Click on any card to hear the name of the shape, color, or animal!</p>
+        </div>
+    </div>
+
+    <script>
+      
+        function playSound(word) {
+     
+            const utterance = new SpeechSynthesisUtterance(word);
+          
+           
+            utterance.rate = 0.8; 
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            
+          
+            window.speechSynthesis.speak(utterance);
+           
+            const card = event.currentTarget;
+            const originalColor = card.style.background;
+            card.style.background = 'linear-gradient(135deg, #9b59b6, #8e44ad)';
+            
+            setTimeout(() => {
+                card.style.background = originalColor;
+            }, 300);
+        }
+
+     
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

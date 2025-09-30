@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعم الآباء</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe66d 0%, #ffd93d 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .back-btn {
+            background: #6a4c93;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: #5a3d82;
+            transform: scale(1.05);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .resources {
+            text-align: right;
+            margin: 30px 0;
+        }
+        .resource-item {
+            background: #f8f9fa;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-right: 5px solid #ffe66d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="back-btn">← العودة للرئيسية</a>
+        <h1>👨‍👩‍👧‍👦 دعم الآباء</h1>
+        <p>موارد ونصائح لدعمكم في رحلة تعليم أطفالكم</p>
+        
+        <div class="resources">
+            <div class="resource-item">
+                <h3>📚 نصائح تعليمية</h3>
+                <p>طرق فعالة لمساعدة الأطفال على التعلم والتركيز</p>
+            </div>
+            <div class="resource-item">
+                <h3>🎯 أنشطة منزلية</h3>
+                <p>ألعاب وأنشطة تعليمية يمكن ممارستها في المنزل</p>
+            </div>
+            <div class="resource-item">
+                <h3>💬 استشارات متخصصة</h3>
+                <p>تواصل مع مختصين للإجابة على استفساراتكم</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

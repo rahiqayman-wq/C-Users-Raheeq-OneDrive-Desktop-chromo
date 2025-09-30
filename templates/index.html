@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Down Syndrome Parent Support - Q&A</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1dc00e89 0%, #0d9b44c1 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .categories {
+            list-style: none;
+        }
+
+        .categories li {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .categories li:hover {
+            background-color: #1dc00e89;
+            color: white;
+        }
+
+        .categories li.active {
+            background-color: #1dc00e89;
+            color: white;
+        }
+
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .search-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .ask-question {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .ask-question h3 {
+            margin-bottom: 1rem;
+            color:  #1dc00e89;
+        }
+
+        .ask-question textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 1rem;
+        }
+
+        .ask-question select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: #1dc00e89;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background:  #1dc00e89;
+        }
+
+        .questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .question-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            flex: 1;
+        }
+
+        .question-text h4 {
+            color: #1dc00e89;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-tag {
+            background:  #1dc00e89;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
+
+        .answer {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid  #1dc00e89;
+        }
+
+        .votes {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .vote-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .vote-btn:hover {
+            color: #1dc00e89;
+        }
+
+        .vote-count {
+            font-weight: bold;
+            color: #1dc00e89;
+        }
+
+        .timestamp {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .user-submitted {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Down Syndrome Parent Support</h1>
+            <p>Find answers, share experiences, and support each other</p>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <h3>Categories</h3>
+                <ul class="categories" id="categories">
+                    <!-- Categories will be loaded here -->
+                </ul>
+            </aside>
+
+            <main class="content-area">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search questions and answers...">
+                </div>
+
+                <section class="ask-question">
+                    <h3>Ask a Question</h3>
+                    <textarea id="questionInput" placeholder="What would you like to ask?"></textarea>
+                    <select id="categorySelect">
+                        <option value="health">Health & Medical</option>
+                        <option value="education">Education & Learning</option>
+                        <option value="daily_life">Daily Life & Routines</option>
+                    </select>
+                    <button class="btn" onclick="submitQuestion()">Submit Question</button>
+                </section>
+
+                <section class="questions-list" id="questionsList">
+                    <!-- Questions will be loaded here -->
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        let currentCategory = 'all';
+        let allQuestions = [];
+
+        // Load categories
+        async function loadCategories() {
+            try {
+                const response = await fetch('/api/categories');
+                const categories = await response.json();
+                
+                const categoriesContainer = document.getElementById('categories');
+                categoriesContainer.innerHTML = '';
+                
+                categories.forEach(category => {
+                    const li = document.createElement('li');
+                    li.textContent = category.name;
+                    li.onclick = () => filterByCategory(category.id);
+                    if (category.id === currentCategory) {
+                        li.classList.add('active');
+                    }
+                    categoriesContainer.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error loading categories:', error);
+            }
+        }
+
+        // Load questions
+        async function loadQuestions(category = 'all') {
+            try {
+                const response = await fetch(`/api/questions?category=${category}`);
+                const questions = await response.json();
+                allQuestions = questions;
+                displayQuestions(questions);
+            } catch (error) {
+                console.error('Error loading questions:', error);
+            }
+        }
+
+        // Display questions
+        function displayQuestions(questions) {
+            const questionsList = document.getElementById('questionsList');
+            questionsList.innerHTML = '';
+
+            if (questions.length === 0) {
+                questionsList.innerHTML = '<div class="question-card">No questions found in this category.</div>';
+                return;
+            }
+
+            questions.sort((a, b) => b.votes - a.votes);
+
+            questions.forEach(question => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                if (question.user_submitted) {
+                    questionCard.classList.add('user-submitted');
+                }
+
+                questionCard.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-text">
+                            <h4>${question.question}</h4>
+                            <div class="answer">${question.answer}</div>
+                        </div>
+                        <span class="category-tag">${getCategoryName(question.category)}</span>
+                    </div>
+                    <div class="votes">
+                        <button class="vote-btn" onclick="voteQuestion(${question.id}, 'up')">👍</button>
+                        <span class="vote-count">${question.votes}</span>
+                        <button class="vote-btn" onclick="voteQuestion(${question.id}, 'down')">👎</button>
+                    </div>
+                    <div class="timestamp">Posted on ${question.timestamp}</div>
+                `;
+
+                questionsList.appendChild(questionCard);
+            });
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            currentCategory = category;
+            loadCategories();
+            loadQuestions(category);
+        }
+
+        // Submit question
+        async function submitQuestion() {
+            const questionInput = document.getElementById('questionInput');
+            const categorySelect = document.getElementById('categorySelect');
+            
+            const question = questionInput.value.trim();
+            const category = categorySelect.value;
+
+            if (!question) {
+                alert('Please enter a question');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/questions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        question: question,
+                        category: category
+                    })
+                });
+
+                if (response.ok) {
+                    questionInput.value = '';
+                    loadQuestions(currentCategory);
+                    alert('Question submitted successfully!');
+                } else {
+                    alert('Error submitting question');
+                }
+            } catch (error) {
+                console.error('Error submitting question:', error);
+                alert('Error submitting question');
+            }
+        }
+
+        // Vote on question
+        async function voteQuestion(questionId, type) {
+            try {
+                const response = await fetch('/api/questions/vote', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        question_id: questionId,
+                        type: type
+                    })
+                });
+
+                if (response.ok) {
+                    loadQuestions(currentCategory);
+                }
+            } catch (error) {
+                console.error('Error voting:', error);
+            }
+        }
+
+        // Search questions
+        document.getElementById('searchInput').addEventListener('input', async (e) => {
+            const query = e.target.value.trim();
+            
+            if (query.length === 0) {
+                loadQuestions(currentCategory);
+                return;
+            }
+
+            if (query.length < 3) return;
+
+            try {
+                const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+                const results = await response.json();
+                displayQuestions(results);
+            } catch (error) {
+                console.error('Error searching:', error);
+            }
+        });
+
+        // Helper function to get category name
+        function getCategoryName(categoryId) {
+            const categories = {
+                'health': 'Health & Medical',
+                'education': 'Education & Learning',
+                'daily_life': 'Daily Life & Routines'
+            };
+            return categories[categoryId] || categoryId;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCategories();
+            loadQuestions();
+        });
+    </script>
+</body>
+</html>

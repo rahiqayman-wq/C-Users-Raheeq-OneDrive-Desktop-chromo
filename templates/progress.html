@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #66ea7a 0%, lab(56% -49.22 23.12 / 0.737) 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .back-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        .progress-summary {
+            background: linear-gradient(45deg, #4ecdc4, #67e6dc);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .progress-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2em;
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+
+        .games-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .game-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .game-item:hover {
+            transform: translateX(10px);
+            background: #e9ecef;
+        }
+
+        .game-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .game-emoji {
+            font-size: 2em;
+        }
+
+        .game-name {
+            font-size: 1.3em;
+            color: #333;
+        }
+
+        .game-score {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1a936f;
+        }
+
+        .not-completed {
+            color: #ff6b6b;
+        }
+
+        .reward {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 4em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('games_dashboard') }}" class="back-btn">← Back to Games</a>
+        
+        <div class="header">
+            <h1 class="title">🌟 Progress Report</h1>
+            <p class="subtitle">See how much you've learned!</p>
+        </div>
+
+        <div class="progress-summary">
+            <div class="progress-circle">
+                {{ completed_games }}/{{ total_games }}
+            </div>
+            <h2>Games Completed</h2>
+            <p>Total Score: {{ total_score }} points</p>
+        </div>
+
+        <div class="games-list">
+      
+            <div class="game-item">
+                <div class="game-info">
+                    <span class="game-emoji">🧠</span>
+                    <span class="game-name">Memory Game</span>
+                </div>
+                <div class="game-score {% if not games.memory.completed %}not-completed{% endif %}">
+                    {% if games.memory.completed %}
+                    ✅ {{ games.memory.score }} points
+                    {% else %}
+                    🔄 Not started
+                    {% endif %}
+                </div>
+            </div>
+
+        
+            <div class="game-item">
+                <div class="game-info">
+                    <span class="game-emoji">🧩</span>
+                    <span class="game-name">Puzzle Game</span>
+                </div>
+                <div class="game-score {% if not games.puzzle.completed %}not-completed{% endif %}">
+                    {% if games.puzzle.completed %}
+                    ✅ {{ games.puzzle.score }} points
+                    {% else %}
+                    🔄 Not started
+                    {% endif %}
+                </div>
+            </div>
+
+  
+            <div class="game-item">
+                <div class="game-info">
+                    <span class="game-emoji">🎨</span>
+                    <span class="game-name">Colors Game</span>
+                </div>
+                <div class="game-score {% if not games.colors.completed %}not-completed{% endif %}">
+                    {% if games.colors.completed %}
+                    ✅ {{ games.colors.score }} points
+                    {% else %}
+                    🔄 Not started
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if completed_games == total_games %}
+        <div class="reward">
+            🏆🎉 Champion! 🎉🏆
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

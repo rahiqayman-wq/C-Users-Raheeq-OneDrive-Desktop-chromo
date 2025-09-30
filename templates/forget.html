@@ -1,0 +1,197 @@
+{%extends "tempelate.html"%}
+{% block content %}
+
+<div class="macbook-air">
+  
+  <img class="background-image" src="{{ url_for('static', filename='down.png') }}" />
+
+
+  <div class="overlay-green"></div>
+
+  <!-- Form -->
+  <div class="group">
+    <div class="group-wrapper">
+      <div class="group-2">
+        <div class="rectangle-2"></div>
+        <div class="text-wrapper">Forget password ?</div>
+        <div class="rectangle-3"></div>
+        <div class="text-wrapper-2">email :</div>
+        <div class="div-wrapper">
+          <div class="group-3">
+            <div class="rectangle-4"></div>
+            <div class="submit">Confirm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+a { text-decoration: none; }
+
+/* Main container */
+.macbook-air {
+  overflow: hidden;
+  width: 100%;
+  min-width: 1280px;
+  min-height: 832px;
+  position: relative;
+}
+
+/* Background image */
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Light green overlay */
+.overlay-green {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: hsla(126, 21%, 44%, 0.589); /* فاتح وشفاف */
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Center the form */
+.group {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* فوق overlay */
+  display: flex;
+  align-items: flex-start;
+}
+
+.group-wrapper {
+  width: 690px;
+  height: 457px;
+  display: flex;
+}
+
+.group-2 {
+  width: 693.86px;
+  height: 457.12px;
+  position: relative;
+}
+
+/* Dark green rectangle for form background */
+.rectangle-2 {
+  position: absolute;
+  top: 0;
+  left: 93px;
+  width: 532px;
+  height: 457px;
+  background-color: #344f37b8; /* أخضر غامق */
+  border-radius: 15px;
+  z-index: 0;
+}
+
+.text-wrapper {
+  position: absolute;
+  top: 41px;
+  left: 0;
+  width: 528px;
+  height: 127px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 32px;
+  text-align: center;
+  z-index: 1;
+  position: relative;
+}
+
+/* Input field rectangle */
+.rectangle-3 {
+  position: absolute;
+  top: 179px;
+  left: 141px;
+  width: 437px;
+  height: 45px;
+  background-color: #233425;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.text-wrapper-2 {
+  position: absolute;
+  top: 177px;
+  left: 106px;
+  width: 175px;
+  height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff52;
+  font-size: 20px;
+  text-align: center;
+  z-index: 1;
+}
+
+.div-wrapper {
+  position: absolute;
+  top: 246px;
+  left: 28px;
+  width: 662px;
+  height: 150px;
+  display: flex;
+  z-index: 1;
+}
+
+.group-3 {
+  flex: 1;
+  width: 663.86px;
+  position: relative;
+}
+
+.rectangle-4 {
+  position: absolute;
+  width: 57.23%;
+  height: 30.88%;
+  top: 34.56%;
+  left: 21.99%;
+  background-color: #58885d; /* زر أخضر */
+  border-radius: 60px;
+  z-index: 1;
+}
+
+.submit {
+  position: absolute;
+  width: 99.7%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  z-index: 2;
+}
+</style>
+{% endblock content %}

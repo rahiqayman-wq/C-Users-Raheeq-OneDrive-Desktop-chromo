@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg,#4aa56d 0%, lab(56% -49.22 23.12 / 0.737) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 50px;
+        }
+
+        .title {
+            color: white;
+            font-size: 3em;
+            text-shadow: 3px 3px 0 #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #ffe66d;
+            font-size: 1.3em;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 4px solid transparent;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            border-color: #4ecdc4;
+        }
+
+        .card-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card-title {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .card-description {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+       
+        .card-1:hover {
+            border-color: #ff6b6b;
+        }
+
+        .card-2:hover {
+            border-color: #4ecdc4;
+        }
+
+        .card-3:hover {
+            border-color: #ffe66d;
+        }
+
+        .card-1 .card-icon {
+            color: #ff6b6b;
+        }
+
+        .card-2 .card-icon {
+            color: #4ecdc4;
+        }
+
+        .card-3 .card-icon {
+            color: #ffe66d;
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .title {
+                font-size: 2.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎴 لوحة التحكم</h1>
+            <p class="subtitle">اختر الخدمة التي تريدها</p>
+        </div>
+
+        <div class="cards-container">
+            <!-- الكارد الأول -->
+            <a href="{{ url_for('card1_page') }}" class="card card-1">
+                <span class="card-icon">🧩</span>
+                <h2 class="card-title">الألعاب التعليمية</h2>
+                <p class="card-description">
+                    العب واستمتع بمجموعة من الألعاب التعليمية المصممة خصيصًا لتنمية مهارات الأطفال
+                </p>
+                <span class="card-badge">3 ألعاب متاحة</span>
+            </a>
+
+            <!-- الكارد الثاني -->
+            <a href="{{ url_for('card2_page') }}" class="card card-2">
+                <span class="card-icon">📊</span>
+                <h2 class="card-title">تقارير التقدم</h2>
+                <p class="card-description">
+                    تابع تقدمك وإنجازاتك في جميع الأنشطة مع تقارير مفصلة وإحصائيات دقيقة
+                </p>
+                <span class="card-badge">تحليلات ذكية</span>
+            </a>
+
+            <!-- الكارد الثالث -->
+            <a href="{{ url_for('card3_page') }}" class="card card-3">
+                <span class="card-icon">👨‍👩‍👧‍👦</span>
+                <h2 class="card-title">دعم الآباء</h2>
+                <p class="card-description">
+                    موارد ونصائح لدعم الآباء في رحلة تعليم أطفالهم وتنمية مهاراتهم المختلفة
+                </p>
+                <span class="card-badge">دعم متكامل</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // إضافة تأثيرات تفاعلية
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach((card, index) => {
+                // تأثير ظهور متتالي
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+
+            // تأثير عند المرور على الكارد
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

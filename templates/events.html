@@ -1,0 +1,491 @@
+{%extends "tempelate.html"%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Events</title>
+  <style>
+    :root {
+      --primary: #4ECDC4;
+      --secondary: #FF6B6B;
+      --accent: #FFE66D;
+      --dark-green: #2C3E50;
+      --light-green: #58885d;
+      --lighter-green: #6a9c6f;
+      --background: #f8f9fa;
+      --text-dark: #2C3E50;
+      --text-light: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    h1 {
+      color: var(--dark-green);
+      margin-bottom: 10px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .page-subtitle {
+      color: var(--light-green);
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 500px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .form-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .form-title {
+      color: var(--dark-green);
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .input-label {
+      color: var(--dark-green);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    input[type="text"] {
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      outline: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
+      background: white;
+    }
+
+    .file-input-container {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .file-input-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+      background: #f8f9fa;
+      border: 2px dashed #e0e0e0;
+      border-radius: 12px;
+      color: var(--dark-green);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .file-input-label:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .file-input-label i {
+      font-size: 1.2rem;
+    }
+
+    input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    button {
+      padding: 15px;
+      background: linear-gradient(135deg, var(--light-green), var(--lighter-green));
+      color: var(--text-light);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(88, 136, 93, 0.3);
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, var(--lighter-green), var(--light-green));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(88, 136, 93, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .events-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      justify-content: center;
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 20px;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .event-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .event-image-container {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      height: 200px;
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .event-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .event-name {
+      color: var(--dark-green);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      flex-grow: 1;
+    }
+
+    .event-date {
+      color: var(--light-green);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .event-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .edit-btn {
+      background: rgba(78, 205, 196, 0.1);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .edit-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .delete-btn {
+      background: rgba(255, 107, 107, 0.1);
+      color: var(--secondary);
+      border: 1px solid var(--secondary);
+    }
+
+    .delete-btn:hover {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: var(--dark-green);
+      grid-column: 1 / -1;
+    }
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: var(--light-green);
+    }
+
+    .empty-state h3 {
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    .empty-state p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+      .events-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .form-container {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .events-list {
+        grid-template-columns: 1fr;
+      }
+      
+      body {
+        padding: 15px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="page-header">
+    <h1>Your Events</h1>
+    <p class="page-subtitle">Create and manage your special moments</p>
+  </div>
+
+  <div class="form-container">
+    <h2 class="form-title">Add New Event</h2>
+    <div class="input-group">
+      <label class="input-label" for="eventName">Event Name</label>
+      <input type="text" id="eventName" placeholder="Enter event name" required>
+    </div>
+    
+    <div class="input-group">
+      <label class="input-label" for="eventImage">Event Image</label>
+      <div class="file-input-container">
+        <label class="file-input-label" for="eventImage">
+          <i class="fas fa-cloud-upload-alt"></i>
+          Choose an image
+        </label>
+        <input type="file" id="eventImage" accept="image/*" required>
+      </div>
+    </div>
+    
+    <button id="addEventBtn">
+      <i class="fas fa-plus-circle"></i>
+      Add Event
+    </button>
+  </div>
+
+  <div class="events-list" id="eventsList">
+    <!-- Empty state initially -->
+    <div class="empty-state">
+      <div class="empty-icon">
+        <i class="fas fa-calendar-plus"></i>
+      </div>
+      <h3>No Events Yet</h3>
+      <p>Create your first event using the form above!</p>
+    </div>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById('addEventBtn');
+    const nameInput = document.getElementById('eventName');
+    const imgInput = document.getElementById('eventImage');
+    const eventsList = document.getElementById('eventsList');
+
+
+    function getRandomDate() {
+      const start = new Date();
+      const end = new Date();
+      end.setMonth(end.getMonth() + 3);
+      const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+      return randomDate.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    }
+
+    addBtn.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      const file = imgInput.files[0];
+      
+      if(!name || !file){
+        alert("Please enter event name and choose an image");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e){
+     
+        const emptyState = eventsList.querySelector('.empty-state');
+        if (emptyState) {
+          emptyState.remove();
+        }
+
+        const card = document.createElement('div');
+        card.className = 'event-card';
+        card.innerHTML = `
+          <div class="event-image-container">
+            <img src="${e.target.result}" alt="${name}">
+          </div>
+          <h3 class="event-name">${name}</h3>
+          <p class="event-date">${getRandomDate()}</p>
+          <div class="event-actions">
+            <button class="action-btn edit-btn">
+              <i class="fas fa-edit"></i> Edit
+            </button>
+            <button class="action-btn delete-btn">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </div>
+        `;
+        
+      
+        const deleteBtn = card.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', function() {
+          if (confirm('Are you sure you want to delete this event?')) {
+            card.remove();
+       
+            if (eventsList.children.length === 0) {
+              eventsList.innerHTML = `
+                <div class="empty-state">
+                  <div class="empty-icon">
+                    <i class="fas fa-calendar-plus"></i>
+                  </div>
+                  <h3>No Events Yet</h3>
+                  <p>Create your first event using the form above!</p>
+                </div>
+              `;
+            }
+          }
+        });
+        
+        eventsList.appendChild(card);
+        nameInput.value = '';
+        imgInput.value = '';
+        
+   
+        const fileInputLabel = document.querySelector('.file-input-label');
+        fileInputLabel.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Choose an image';
+      }
+      reader.readAsDataURL(file);
+    });
+
+ 
+    imgInput.addEventListener('change', function() {
+      const fileInputLabel = document.querySelector('.file-input-label');
+      if (this.files.length > 0) {
+        fileInputLabel.innerHTML = `<i class="fas fa-check"></i> ${this.files[0].name}`;
+      } else {
+        fileInputLabel.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Choose an image';
+      }
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const formContainer = document.querySelector('.form-container');
+      formContainer.style.opacity = '0';
+      formContainer.style.transform = 'translateY(20px)';
+      
+      setTimeout(() => {
+        formContainer.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        formContainer.style.opacity = '1';
+        formContainer.style.transform = 'translateY(0)';
+      }, 300);
+    });
+  </script>
+</body>
+</html>
+{% endblock content %}
