@@ -6,6 +6,7 @@
     <div class="d-sm-flex align-items-center justify-content-between">
       <div class="hero-text ps-5">
         <h1 class="hero-title display-4 fw-bold mb-4">
+          <div id="google_translate_element"></div>
           Empowering Children with Down Syndrome
         </h1>
         <p class="lead my-4 hero-lead">
@@ -38,6 +39,16 @@
            src="{{ url_for('static', filename='2150520907 (2) 1.png') }}" alt="Child using educational app">
     </div>
   </div>
+  <script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'ar,en'
+  }, 'google_translate_element');
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </section>
 
 <footer class="bg-dark text-white text-center p-3">
